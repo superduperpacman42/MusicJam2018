@@ -1,0 +1,34 @@
+package game;
+
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class SpriteSheet {
+	
+	private Image[] images;
+	public final int frames;
+	public final int width;
+	public final int height;
+	
+	public SpriteSheet(String filename, int columns, int frames) {
+		this.frames = frames;
+		try {
+			BufferedImage sheet = ImageIO.read(SpriteSheet.class.getResourceAsStream(filename));
+			width = sheet.getWidth()/columns;
+			height = (int) (sheet.getHeight()/Math.ceil(frames/columns));
+			for(int i=0; i<frames; i++) {
+				images[i] = sheet.getSubimage((i%columns)*width, (i/columns)*height, width, height);
+			}
+		} catch (IOException e) {
+			System.err.println("Image not loaded: "+filename);
+			width = 0;
+		}
+	}
+	
+	public Image getFrame(int index) {
+		return images[index];
+	}
+}

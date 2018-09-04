@@ -1,0 +1,9 @@
+package game;
+
+public class SpriteSheet {
+
+	public SpriteSheet(String name) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,15 @@
+package game;
+
+import java.awt.Point;
+
+public abstract class GameObject {
+	
+	private Sprite sprite;
+	public Point location;
+	
+	public GameObject(Sprite sprite, int x, int y) {
+		this.sprite = sprite;
+	}
+	
+	
+}

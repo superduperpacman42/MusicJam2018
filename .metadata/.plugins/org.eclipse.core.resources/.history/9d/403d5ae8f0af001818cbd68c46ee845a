@@ -1,0 +1,13 @@
+package game;
+
+public abstract class GameObject {
+	
+	private Sprite sprite;
+	public Point location;
+	
+	public GameObject(Sprite sprite) {
+		this.sprite = sprite;
+	}
+	
+	
+}

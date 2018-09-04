@@ -1,0 +1,16 @@
+package game;
+
+import java.awt.Image;
+
+public class SpriteSheet {
+	
+	private Image[] images;
+	
+	public SpriteSheet(String filename)
+
+	public SpriteSheet(String name) {
+		Image sheet = ImageIO.read(SpriteSheet.class.getResourceAsStream(name+".png"));
+
+	}
+
+}

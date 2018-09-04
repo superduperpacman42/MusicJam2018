@@ -1,0 +1,10 @@
+package game;
+
+public class GameObject {
+	
+	Sprite sprite;
+	
+	public GameObject() {
+		
+	}
+}

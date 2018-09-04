@@ -1,0 +1,10 @@
+package game;
+
+public abstract class GameObject {
+	
+	Sprite sprite;
+	
+	public GameObject(Sprite sprite) {
+		self.sprite = sprite;
+	}
+}

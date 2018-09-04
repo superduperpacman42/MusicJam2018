@@ -1,0 +1,30 @@
+package game;
+
+import java.awt.Graphics;
+import java.awt.Point;
+
+/**
+ * A game element capable of animation and movement
+ */
+public abstract class GameObject {
+	
+	private Sprite sprite;
+	public int x, y;
+	
+	public GameObject(Sprite sprite, int x, int y) {
+		this.sprite = sprite;
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
+	 * Renders the sprite
+	 * @param g - the Graphics context with appropriate translation and scaling
+	 */
+	public void draw(Graphics g) {
+		g.translate(-x, -y);
+		sprite.draw(g, this);
+		g.translate(x, y);
+	}
+	
+}
