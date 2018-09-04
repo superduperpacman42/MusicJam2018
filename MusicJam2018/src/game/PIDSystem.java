@@ -44,6 +44,7 @@ public class PIDSystem {
 		double diff = target_value - value;
 		integral_sum += diff*dt;
 		double delta = p*diff + i*integral_sum + d*last_derivative;
+		value += delta*dt;
 		last_derivative = delta;
 	}
 	

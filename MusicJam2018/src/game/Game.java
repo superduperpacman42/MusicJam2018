@@ -1,6 +1,9 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -16,7 +19,7 @@ public class Game {
 	public Camera camera;
 	public static final String NAME = "GAME JAM";
 	public static final int WIDTH = 1280;
-	public static final int HEIGHT = 720;
+	public static final int HEIGHT = 755;
 	public static final int MAX_STEP = 50000000;
 	public static final int FRAME_RATE = 12;
 	public int MIN_STEP = 10000000;
@@ -85,8 +88,6 @@ public class Game {
 		
 		dt = camera.update(dt);	//	dt changes values here based on camera speed
 		
-		test_local_time += dt;
-		delete_this_variable = (int) (1480/3*(test_local_time%3)-100);
 
 	}
 
@@ -95,11 +96,24 @@ public class Game {
 	 * @param g - the game's Graphics context
 	 */
 	public void draw(Graphics g) {
-		g.fillRect(delete_this_variable + 10, 10, 100, 100);
-		g.fillRect(1180 - delete_this_variable - 10, 120, 100, 100);
-		g.fillRect(delete_this_variable + 10, 230, 100, 100);
-		g.fillRect(1180 - delete_this_variable - 10, 340, 100, 100);
-		g.fillRect(delete_this_variable + 10, 450, 100, 100);
-		g.fillRect(1180 - delete_this_variable - 10, 560, 100, 100);
+		Graphics2D g2 = (Graphics2D) g;
+		camera.set_target_pos(-640, -360);
+		camera.zoom.set_target_value(2.0);
+		System.out.println(camera.get_zoom());
+		g2.scale(camera.get_zoom(), camera.get_zoom());
+		g2.translate((int)(camera.get_x_pos() + WIDTH/(2*camera.get_zoom())), 
+				(int)(camera.get_y_pos() + HEIGHT/(2*camera.get_zoom())));
+		
+		int xs[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+		int ys[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+		for (int x : xs) {
+			for (int y : ys) {
+				if ((x+y)%2 == 0) {
+					int sq_size = 80;
+					g.setColor(Color.lightGray);
+					g.fillRect(sq_size*x, sq_size*y, sq_size, sq_size);
+				}
+			}
+		}
 	}
 }

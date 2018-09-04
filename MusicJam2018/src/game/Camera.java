@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Camera {
 	
-	public PIDSystem speed = new PIDSystem("speed", 1.0, 5, 0, 0);
-	public PIDSystem zoom = new PIDSystem("zoom", 1.0, 5, 0, 0);
-	public PIDSystem x_pos = new PIDSystem("x_pos", 0, 5, 0, 0);
-	public PIDSystem y_pos = new PIDSystem("y_pos", 0, 5, 0, 0);
+	public PIDSystem speed = new PIDSystem("speed", 1.0, 3, 0, 0);
+	public PIDSystem zoom = new PIDSystem("zoom", 1.0, 3, 0, 0);
+	public PIDSystem x_pos = new PIDSystem("x_pos", 0, 3, 0, 0);
+	public PIDSystem y_pos = new PIDSystem("y_pos", 0, 3, 0, 0);
 	
 	public PIDSystem pids[] = {speed, zoom, x_pos, y_pos};
 	
@@ -72,5 +72,27 @@ public class Camera {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns the current x position of the camera focus
+	 * @return
+	 * Current x position
+	 */
+	public int get_x_pos() {
+		return (int)(x_pos.get_value());
+	}
+	
+	/**
+	 * Returns the current y position of the camera focus
+	 * @return
+	 * Current y position
+	 */
+	public int get_y_pos() {
+		return (int)(y_pos.get_value());
+	}
+	
+	public double get_zoom() {
+		return zoom.get_value();
 	}
 }
