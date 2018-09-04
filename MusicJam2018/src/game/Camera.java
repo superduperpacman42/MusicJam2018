@@ -12,6 +12,7 @@ public class Camera {
 	public PIDSystem pids[] = {speed, zoom, x_pos, y_pos};
 	
 	public void Camera() {
+		
 	}
 	
 	/**
@@ -29,7 +30,7 @@ public class Camera {
 			system.update(dt);
 		}
 		
-		double new_dt = dt * speed;
+		double new_dt = dt * speed.get_value();
 		return new_dt;
 	}
 	
@@ -60,7 +61,7 @@ public class Camera {
 	 * Proportional speed value
 	 */
 	public void set_target_speed(double speed) {
-		this.speed.set_target_value(speed)
+		this.speed.set_target_value(speed);
 	}
 	
 	public bool set_pid_for_item(String item, double p, double i, double d) {

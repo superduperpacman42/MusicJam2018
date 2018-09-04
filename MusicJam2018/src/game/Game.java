@@ -13,15 +13,19 @@ import javax.swing.JPanel;
 public class Game {
 	
 	private JFrame frame;
+	public Camera camera;
 	public static final String NAME = "GAME JAM";
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	public static final int MAX_STEP = 50000000;
+	public static final int FRAME_RATE = 12;
 	public int MIN_STEP = 10000000;
 	public int windowWidth;
 	public int windowHeight;
 	public boolean isRunning;
 	
+	public int delete_this_variable = 0;
+	public double test_local_time = 0;
 	
 	public static void main(String[] args) {
 		Game game = new Game();
@@ -34,6 +38,7 @@ public class Game {
 	
 	public Game(int windowWidth, int windowHeight) {
 		frame = new JFrame(NAME);
+		camera = new Camera();
 		this.windowWidth = windowWidth;
 		this.windowHeight = windowHeight;
 		frame.setSize(windowWidth, windowHeight);
@@ -75,7 +80,14 @@ public class Game {
 	 * @param dt - elapsed time in seconds
 	 */
 	public void update(double dt) {
+		// Put code for user interface before camera update, so slowdowns
+		// don't affect UI elements.
 		
+		dt = camera.update(dt);	//	dt changes values here based on camera speed
+		
+		test_local_time += dt;
+		delete_this_variable = (int) (1480/3*(test_local_time%3)-100);
+
 	}
 
 	/**
@@ -83,6 +95,11 @@ public class Game {
 	 * @param g - the game's Graphics context
 	 */
 	public void draw(Graphics g) {
-		g.fillRect(10, 10, 100, 100);
+		g.fillRect(delete_this_variable + 10, 10, 100, 100);
+		g.fillRect(1180 - delete_this_variable - 10, 120, 100, 100);
+		g.fillRect(delete_this_variable + 10, 230, 100, 100);
+		g.fillRect(1180 - delete_this_variable - 10, 340, 100, 100);
+		g.fillRect(delete_this_variable + 10, 450, 100, 100);
+		g.fillRect(1180 - delete_this_variable - 10, 560, 100, 100);
 	}
 }
