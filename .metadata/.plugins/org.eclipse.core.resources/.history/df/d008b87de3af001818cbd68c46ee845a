@@ -1,0 +1,18 @@
+package game;
+
+import javax.swing.JFrame;
+
+public class Game {
+	
+	JFrame frame;
+	
+	public static void main(String[] args) {
+		Game game = new Game("GAME JAM");
+		game.start();
+	}
+	
+	public Game(String name) {
+		frame = new JFrame(name);
+		
+	}
+}

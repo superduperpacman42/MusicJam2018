@@ -1,0 +1,21 @@
+package game;
+
+import javax.swing.JFrame;
+
+public class Game {
+	
+	private JFrame frame;
+	public final String name = "GAME JAM";
+	
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.start();
+	}
+	
+	public Game() {
+		frame = new JFrame(name);
+		frame.setSize(width, height);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+}

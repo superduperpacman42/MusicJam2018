@@ -1,0 +1,30 @@
+package game;
+
+import javax.swing.JFrame;
+
+public class Game {
+	
+	private JFrame frame;
+	public static final String NAME = "GAME JAM";
+	public static final int WIDTH = 1000;
+	public static final int HEIGHT = 1000;
+	public static int WINDOW_WIDTH = WIDTH;
+	public static int WINDOW_HEIGHT = HEIGHT;
+	
+	
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.start();
+	}
+	
+	public Game() {
+		this(WINDOW_WIDTH, WINDOW_HEIGHT);
+	}
+	
+	public Game(int windowWidth, int windowHeight) {
+		frame = new JFrame(NAME);
+		frame.setSize(width, height);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+}
