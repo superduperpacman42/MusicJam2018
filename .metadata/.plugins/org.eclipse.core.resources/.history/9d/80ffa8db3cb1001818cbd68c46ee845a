@@ -11,9 +11,4 @@ public class Hydra extends GameObject {
 		this.sprite.animate("hydra", dt);
 	}
 
-	@Override
-	public boolean isCollidable(GameObject obj) {
-		return false;
-	}
-
 }

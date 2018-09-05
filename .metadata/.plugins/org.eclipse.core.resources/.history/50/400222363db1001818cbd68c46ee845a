@@ -57,6 +57,5 @@ public abstract class GameObject {
 	public boolean move(int dx, int dy, boolean collisions) {
 		x += dx;
 		y += dy;
-		return false;
 	}
 }

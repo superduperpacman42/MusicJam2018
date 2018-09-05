@@ -30,13 +30,6 @@ public abstract class GameObject {
 	public abstract void update(double dt);
 	
 	/**
-	 * Checks for ability to collide with another object
-	 * @param obj - GameObject being collided with
-	 * @return If a collision is allowed between the two GameObjects
-	 */
-	public abstract boolean isCollidable(GameObject obj);
-	
-	/**
 	 * Renders the sprite
 	 * @param g - the Graphics context with appropriate translation and scaling
 	 */
@@ -45,18 +38,5 @@ public abstract class GameObject {
 		g.translate(x, y);
 		sprite.draw(g, this);
 		g.translate(-x, -y);
-	}
-	
-	/**
-	 * Move GameObject by a set distance
-	 * @param dx - horizontal movement in pixels
-	 * @param dy - vertical movement in pixels
-	 * @param collisions - whether object is prevented from moving through other objects
-	 * @return If a collision occurs
-	 */
-	public boolean move(int dx, int dy, boolean collisions) {
-		x += dx;
-		y += dy;
-		return false;
 	}
 }

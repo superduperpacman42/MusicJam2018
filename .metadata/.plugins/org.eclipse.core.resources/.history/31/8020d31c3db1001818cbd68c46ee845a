@@ -30,9 +30,9 @@ public abstract class GameObject {
 	public abstract void update(double dt);
 	
 	/**
-	 * Checks for ability to collide with another object
+	 * Checks for collision by another object
 	 * @param obj - GameObject being collided with
-	 * @return If a collision is allowed between the two GameObjects
+	 * @return
 	 */
 	public abstract boolean isCollidable(GameObject obj);
 	
@@ -55,8 +55,6 @@ public abstract class GameObject {
 	 * @return If a collision occurs
 	 */
 	public boolean move(int dx, int dy, boolean collisions) {
-		x += dx;
-		y += dy;
-		return false;
+		
 	}
 }

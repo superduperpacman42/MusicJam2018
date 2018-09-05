@@ -57,6 +57,7 @@ public class AudioPlayer {
             SourceDataLine line;
             try {
                 InputStream stream = getClass().getResourceAsStream(filename);
+                System.out.println(stream);
                 audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(stream));
             } catch (UnsupportedAudioFileException e) {
                 System.err.println("File not supported: " + e);
