@@ -58,7 +58,6 @@ public class Game {
 		});
 		sprites.add(new Hydra(100, 100));
 		AudioPlayer music = new AudioPlayer("OpenSource.wav");
-		music.play();
 	}
 	
 	/**

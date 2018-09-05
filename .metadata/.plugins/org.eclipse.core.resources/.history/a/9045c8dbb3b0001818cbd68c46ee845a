@@ -8,7 +8,7 @@ public class Hydra extends GameObject {
 
 	@Override
 	public void update(double dt) {
-		this.sprite.animate("hydra", dt);
+		this.sprite.animate();
 	}
 
 }

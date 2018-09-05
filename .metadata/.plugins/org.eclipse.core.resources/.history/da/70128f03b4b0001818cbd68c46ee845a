@@ -35,8 +35,8 @@ public abstract class GameObject {
 	 */
 	public void draw(Graphics g) {
 		if(!visible) return;
-		g.translate(x, y);
-		sprite.draw(g, this);
 		g.translate(-x, -y);
+		sprite.draw(g, this);
+		g.translate(x, y);
 	}
 }

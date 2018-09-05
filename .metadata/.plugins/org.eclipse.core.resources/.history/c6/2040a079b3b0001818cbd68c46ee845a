@@ -57,8 +57,6 @@ public class Game {
 			}
 		});
 		sprites.add(new Hydra(100, 100));
-		AudioPlayer music = new AudioPlayer("OpenSource.wav");
-		music.play();
 	}
 	
 	/**
@@ -102,12 +100,17 @@ public class Game {
 	 * @param g - the game's Graphics context
 	 */
 	public void draw(Graphics g) {
+		for (GameObject sprite:sprites) {
+			sprite.draw(g);
+		}
 		Graphics2D g2 = (Graphics2D) g;
 		long xfoc = (int)(Math.sin(System.nanoTime()/500000000.0)*(500)) - 640;
 		long yfoc = (int)(Math.cos(System.nanoTime()/750000000.0)*(320)) - 360;
 		double zoom = Math.sin(System.nanoTime()/2000000000.0)*0.5 + 1.0;
 		camera.set_target_pos(xfoc, yfoc);
+		System.out.print(xfoc);
 		camera.zoom.set_target_value(zoom);
+		System.out.println(camera.get_zoom());
 		g2.scale(camera.get_zoom(), camera.get_zoom());
 		g2.translate((int)(camera.get_x_pos() + WIDTH/(2*camera.get_zoom())), 
 				(int)(camera.get_y_pos() + HEIGHT/(2*camera.get_zoom())));
@@ -125,9 +128,6 @@ public class Game {
 					g.fillRect(sq_size*x, sq_size*y, sq_size, sq_size);
 				}
 			}
-		}
-		for (GameObject sprite:sprites) {
-			sprite.draw(g);
 		}
 	}
 }
