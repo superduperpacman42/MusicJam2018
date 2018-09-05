@@ -25,9 +25,18 @@ public class Sprite {
 		if(animations.containsKey(name)) {
 			return; // duplicate detection
 		}
-		animations.put(a, new SpriteSheet(i>0?a.filename:name+".png", a.columns, a.frames));
+		animations.put(a, new SpriteSheet(i>0?filename:name+".png", columns, frames));
 	
 	}
+	
+	/**
+	 * Adds a sprite sheet to the dictionary
+	 * @param filename - filename of animation (.png extension by default)
+	 * @param columns - number of columns in the sprite sheet
+	 * @param frames - total number of frames in the sprite sheet
+	 */
+	public static void loadAnimation(String filename, int columns, int frames) {
+		}
 	
 	/**
 	 * Updates the animation by a specified time step

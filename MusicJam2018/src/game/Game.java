@@ -56,7 +56,7 @@ public class Game {
 				draw(g);
 			}
 		});
-		sprites.add(new Hydra(100, 100));
+		sprites.add(new PlatformingObject(640, 640));
 		AudioPlayer music = new AudioPlayer("OpenSource.wav");
 		music.play();
 	}
@@ -112,9 +112,12 @@ public class Game {
 	 */
 	public void draw(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		long xfoc = (int)(Math.sin(System.nanoTime()/500000000.0)*(500)) - 640;
-		long yfoc = (int)(Math.cos(System.nanoTime()/750000000.0)*(320)) - 360;
-		double zoom = Math.sin(System.nanoTime()/2000000000.0)*0.5 + 1.0;
+		long xfoc = (int)(Math.sin(System.nanoTime()/1000000000.0)*(500)) - 640;
+		long yfoc = (int)(Math.cos(System.nanoTime()/1500000000.0)*(320)) - 360;
+		double zoom = Math.sin(System.nanoTime()/2500000000.0)*0.5 + 1.0;
+		xfoc = -WIDTH/2;
+		yfoc = -HEIGHT/2;
+		zoom = 1.0;
 		camera.set_target_pos(xfoc, yfoc);
 		camera.zoom.set_target_value(zoom);
 		g2.scale(camera.get_zoom(), camera.get_zoom());

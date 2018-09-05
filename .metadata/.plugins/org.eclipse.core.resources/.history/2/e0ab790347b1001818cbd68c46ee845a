@@ -20,14 +20,24 @@ public class Sprite {
 	 * @param a - The animation to load
 	 */
 	public static void loadAnimation(GameObject.Animations a) {
-		int i = a.filename.indexOf(".");
-		String name = i>0?a.filename.substring(0, a.filename.indexOf(".")):a.filename;
+		loadAnimation(a.filename, a.columns, a.frames);
+		int i = filename.indexOf(".");
+		String name = i>0?filename.substring(0, filename.indexOf(".")):filename;
 		if(animations.containsKey(name)) {
 			return; // duplicate detection
 		}
-		animations.put(a, new SpriteSheet(i>0?a.filename:name+".png", a.columns, a.frames));
+		animations.put(name, new SpriteSheet(i>0?filename:name+".png", columns, frames));
 	
 	}
+	
+	/**
+	 * Adds a sprite sheet to the dictionary
+	 * @param filename - filename of animation (.png extension by default)
+	 * @param columns - number of columns in the sprite sheet
+	 * @param frames - total number of frames in the sprite sheet
+	 */
+	public static void loadAnimation(String filename, int columns, int frames) {
+		}
 	
 	/**
 	 * Updates the animation by a specified time step

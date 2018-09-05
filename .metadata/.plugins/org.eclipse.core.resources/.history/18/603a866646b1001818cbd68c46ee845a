@@ -16,4 +16,9 @@ public class Hydra extends GameObject {
 	public boolean isCollidable(GameObject obj) {
 		return false;
 	}
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> cfef43650b6f71740d67e85d82433a2a62051b53
