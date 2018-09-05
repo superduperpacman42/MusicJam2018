@@ -3,17 +3,17 @@ package game;
 public class Hydra extends GameObject {
 	
 	public Hydra(int x, int y) {
-		super(new Sprite(new int[]{4},new int[]{4},"hydra"), x, y);
+		super(x, y, 2, 100, 100);
 	}
 
 	@Override
-	public void update(double dt) {
-		this.sprite.animate("hydra", dt);
+	public double[] update(double dt) {
+		this.sprite.animate(Animations.HYDRA, dt);
+		return new double[]{0,0};
 	}
 
 	@Override
 	public boolean isCollidable(GameObject obj) {
 		return false;
 	}
-
 }

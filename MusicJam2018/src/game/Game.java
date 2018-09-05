@@ -3,15 +3,13 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.util.ArrayList;
-import java.util.Timer;
+import java.util.Collections;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import game.GameObject.Animations;
 
 public class Game {
 	
@@ -41,7 +39,9 @@ public class Game {
 		this(WIDTH, HEIGHT);
 	}
 	
+	@SuppressWarnings("serial")
 	public Game(int windowWidth, int windowHeight) {
+		loadAllAnimations();
 		frame = new JFrame(NAME);
 		camera = new Camera();
 		this.windowWidth = windowWidth;
@@ -92,8 +92,17 @@ public class Game {
 		// don't affect UI elements.
 		
 		dt = camera.update(dt);	//	dt changes values here based on camera speed
-		for (GameObject sprite:sprites) {
-			sprite.update(dt);
+		Collections.sort(sprites);
+		for(GameObject sprite:sprites) {
+			double[] movement = sprite.update(dt);
+			double dx = movement[0];
+			double dy = movement[1];
+			for(GameObject sprite2:sprites) {
+				if(sprite2!=sprite && sprite2.isCollidable(sprite)) {
+//					sprite.collide()
+				}
+				sprite.move(dx, dy);
+			}
 		}
 	}
 
@@ -128,6 +137,15 @@ public class Game {
 		}
 		for (GameObject sprite:sprites) {
 			sprite.draw(g);
+		}
+	}
+	
+	/**
+	 * Loads all animation files
+	 */
+	public static void loadAllAnimations() {
+		for(Animations a:Animations.values()) {
+			Sprite.loadAnimation(a);
 		}
 	}
 }

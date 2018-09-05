@@ -5,20 +5,39 @@ import java.awt.Graphics;
 /**
  * A game element capable of displaying animations
  */
-public abstract class GameObject {
+public abstract class GameObject implements Comparable<GameObject> {
 	
 	protected Sprite sprite;
-	public int x, y;
+	public double x, y;
+	public int z, w, h;
 	public boolean visible = true;
 	
 	/**
+	 * Animations that Sprites can display
+	 */
+	public enum Animations {
+		HYDRA("hydra", 4, 4);
+		
+		public String filename;
+		public int columns;
+		public int frames;
+		private Animations(String filename, int columns, int frames) {
+			this.filename = filename;
+			this.columns = columns;
+			this.frames = frames;
+		}
+	}
+	
+	/**
 	 * Superclass constructor
-	 * @param sprite - a Sprite object instantiated by a subclass
 	 * @param x - initial x-coordinate in pixels
 	 * @param y - initial y-coordinate in pixels
+	 * @param z - relative layer to display sprite on-screen
+	 * @param w - width of GameObject for collisions in pixels
+	 * @param h - height of GameObject for collisions in pixels
 	 */
-	public GameObject(Sprite sprite, int x, int y) {
-		this.sprite = sprite;
+	public GameObject(double x, double y, int z, int w, int h) {
+		this.sprite = new Sprite();
 		this.x = x;
 		this.y = y;
 	}
@@ -26,8 +45,9 @@ public abstract class GameObject {
 	/**
 	 * Updates the sprite behavior and animation
 	 * @param dt - elapsed time in seconds
+	 * @return An array containing horizontal and vertical displacement in pixels
 	 */
-	public abstract void update(double dt);
+	public abstract double[] update(double dt);
 	
 	/**
 	 * Checks for ability to collide with another object
@@ -42,21 +62,27 @@ public abstract class GameObject {
 	 */
 	public void draw(Graphics g) {
 		if(!visible) return;
-		g.translate(x, y);
+		g.translate((int)x, (int)y);
 		sprite.draw(g, this);
-		g.translate(-x, -y);
+		g.translate((int)-x, (int)-y);
+	}
+	
+	public double[] collide(double dx, double dy, GameObject obj) {
+		return new double[]{dx, dy};
 	}
 	
 	/**
 	 * Move GameObject by a set distance
 	 * @param dx - horizontal movement in pixels
 	 * @param dy - vertical movement in pixels
-	 * @param collisions - whether object is prevented from moving through other objects
-	 * @return If a collision occurs
 	 */
-	public boolean move(int dx, int dy, boolean collisions) {
+	public void move(double dx, double dy) {
 		x += dx;
 		y += dy;
-		return false;
+	}
+	
+	@Override
+	public int compareTo(GameObject obj) {
+		return z - obj.z;
 	}
 }

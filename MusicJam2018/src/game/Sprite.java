@@ -9,33 +9,18 @@ import java.util.HashMap;
  */
 public class Sprite {
 	
-	public int framerate, width, height, duration;
+	public int framerate = Game.FRAME_RATE, width, height, duration;
 	private static HashMap<String, SpriteSheet> animations = new HashMap<String, SpriteSheet>();
 	private Image frame;
-	private String state;
+	private GameObject.Animations state;
 	private double t;
 	
 	/**
-	 * Instantiates the sprite's animations
-	 * @param frames - array of frame counts
-	 * @param columns - array of column counts
-	 * @param animations - array of filenames (.png is assumed by default)
+	 * Adds a sprite sheet to the dictionary
+	 * @param a - The animation to load
 	 */
-	public Sprite(int[] frames, int[] columns, String... animations) {
-		for(int i=0; i<animations.length; i++) {
-			loadAnimation(animations[i], columns[i], frames[i]);
-		}
-		framerate = Game.FRAME_RATE;
-	}
-	
-	/**
-	 * Render the sprite centered at (0,0)
-	 * @param g - the Graphics context centered on the sprite
-	 * @param object - the GameObject possessing the sprite
-	 */
-	public void draw(Graphics g, GameObject object) {
-		if(frame==null||state=="") return; // error detection
-		g.drawImage(frame, -width/2, -height/2, width, height, null);
+	public static void loadAnimation(GameObject.Animations a) {
+		loadAnimation(a.filename, a.columns, a.frames);
 	}
 	
 	/**
@@ -59,7 +44,7 @@ public class Sprite {
 	 * @param dt - the time step in seconds
 	 * @return true if the animation completed
 	 */
-	public boolean animate(String state, double dt) {
+	public boolean animate(GameObject.Animations state, double dt) {
 		if(!animations.containsKey(state)) {
 			System.err.println("Animation not found: "+state);
 			return false; // Error detection
@@ -80,5 +65,15 @@ public class Sprite {
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Render the sprite centered at (0,0)
+	 * @param g - the Graphics context centered on the sprite
+	 * @param object - the GameObject possessing the sprite
+	 */
+	public void draw(Graphics g, GameObject object) {
+		if(frame==null||state==null) return; // error detection
+		g.drawImage(frame, -width/2, -height/2, width, height, null);
 	}
 }

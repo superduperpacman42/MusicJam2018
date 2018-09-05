@@ -1,0 +1,20 @@
+package game;
+
+public class Hydra extends GameObject {
+	
+	public Hydra(int x, int y) {
+		super(new Sprite(new int[]{4},new int[]{4},"hydra"), x, y, 2, 100, 100);
+	}
+
+	@Override
+	public int[] update(double dt) {
+		this.sprite.animate("hydra", dt);
+		
+	}
+
+	@Override
+	public boolean isCollidable(GameObject obj) {
+		return false;
+	}
+
+}
