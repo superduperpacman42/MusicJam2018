@@ -26,7 +26,7 @@ public class SpriteSheet {
 		images = new Image[frames];
 		this.frames = frames;
 		try {
-			String path = "animations/" + filename;
+			String path = "/animations/" + filename;
 			BufferedImage sheet = ImageIO.read(SpriteSheet.class.getResourceAsStream(path));
 			width = sheet.getWidth()/columns;
 			height = (int) (sheet.getHeight()/Math.ceil(frames/columns));
@@ -34,6 +34,8 @@ public class SpriteSheet {
 				images[i] = sheet.getSubimage((i%columns)*width, (i/columns)*height, width, height);
 			}
 		} catch (IOException e) {
+			System.err.println("Image not loaded: "+filename);
+		} catch (IllegalArgumentException e) {
 			System.err.println("Image not loaded: "+filename);
 		}
 	}

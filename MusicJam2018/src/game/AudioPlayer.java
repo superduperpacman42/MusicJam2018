@@ -18,7 +18,7 @@ public class AudioPlayer {
     private boolean paused;
     
     public AudioPlayer(String filename){
-        this.filename = "sounds/"+filename;
+        this.filename = "/sounds/"+filename;
     }
     
     public AudioPlayer(){
