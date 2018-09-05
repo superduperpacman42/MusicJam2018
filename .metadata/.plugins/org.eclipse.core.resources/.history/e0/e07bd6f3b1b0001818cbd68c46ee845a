@@ -33,8 +33,9 @@ public class Game {
 	public ArrayList<GameObject> sprites = new ArrayList<GameObject>();
 	
 	public static void main(String[] args) {
-		Game game = new Game();
-		game.start();
+		AudioPlayer.initTestProgram();
+//		Game game = new Game();
+//		game.start();
 	}
 	
 	public Game() {
@@ -93,6 +94,7 @@ public class Game {
 		for (GameObject sprite:sprites) {
 			sprite.update(dt);
 		}
+
 	}
 
 	/**

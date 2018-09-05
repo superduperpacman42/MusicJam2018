@@ -33,8 +33,9 @@ public class Game {
 	public ArrayList<GameObject> sprites = new ArrayList<GameObject>();
 	
 	public static void main(String[] args) {
-		Game game = new Game();
-		game.start();
+		AudioPlayer.initTestProgram();
+//		Game game = new Game();
+//		game.start();
 	}
 	
 	public Game() {
@@ -88,11 +89,12 @@ public class Game {
 	public void update(double dt) {
 		// Put code for user interface before camera update, so slowdowns
 		// don't affect UI elements.
-		
-		dt = camera.update(dt);	//	dt changes values here based on camera speed
 		for (GameObject sprite:sprites) {
-			sprite.update(dt);
+			sprite.draw(g);
 		}
+		dt = camera.update(dt);	//	dt changes values here based on camera speed
+		
+
 	}
 
 	/**

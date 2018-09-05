@@ -23,7 +23,6 @@ public class SpriteSheet {
 	 * @param frames - total number of frames in the sprite sheet
 	 */
 	public SpriteSheet(String filename, int columns, int frames) {
-		images = new Image[frames];
 		this.frames = frames;
 		try {
 			String path = "animations/" + filename;

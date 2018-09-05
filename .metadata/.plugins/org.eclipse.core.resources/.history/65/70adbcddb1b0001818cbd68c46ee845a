@@ -33,8 +33,9 @@ public class Game {
 	public ArrayList<GameObject> sprites = new ArrayList<GameObject>();
 	
 	public static void main(String[] args) {
-		Game game = new Game();
-		game.start();
+		AudioPlayer.initTestProgram();
+//		Game game = new Game();
+//		game.start();
 	}
 	
 	public Game() {
@@ -90,9 +91,8 @@ public class Game {
 		// don't affect UI elements.
 		
 		dt = camera.update(dt);	//	dt changes values here based on camera speed
-		for (GameObject sprite:sprites) {
-			sprite.update(dt);
-		}
+		
+
 	}
 
 	/**
@@ -100,9 +100,6 @@ public class Game {
 	 * @param g - the game's Graphics context
 	 */
 	public void draw(Graphics g) {
-		for (GameObject sprite:sprites) {
-			sprite.draw(g);
-		}
 		Graphics2D g2 = (Graphics2D) g;
 		camera.set_target_pos(-640, -360);
 		camera.zoom.set_target_value(2.0);

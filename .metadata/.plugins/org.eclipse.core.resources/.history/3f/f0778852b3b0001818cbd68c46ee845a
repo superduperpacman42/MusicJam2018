@@ -103,24 +103,24 @@ public class Game {
 		for (GameObject sprite:sprites) {
 			sprite.draw(g);
 		}
-		Graphics2D g2 = (Graphics2D) g;
-		camera.set_target_pos(-640, -360);
-		camera.zoom.set_target_value(2.0);
-		System.out.println(camera.get_zoom());
-		g2.scale(camera.get_zoom(), camera.get_zoom());
-		g2.translate((int)(camera.get_x_pos() + WIDTH/(2*camera.get_zoom())), 
-				(int)(camera.get_y_pos() + HEIGHT/(2*camera.get_zoom())));
-		
-		int xs[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-		int ys[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-		for (int x : xs) {
-			for (int y : ys) {
-				if ((x+y)%2 == 0) {
-					int sq_size = 80;
-					g.setColor(Color.lightGray);
-					g.fillRect(sq_size*x, sq_size*y, sq_size, sq_size);
-				}
-			}
-		}
+//		Graphics2D g2 = (Graphics2D) g;
+//		camera.set_target_pos(-640, -360);
+//		camera.zoom.set_target_value(2.0);
+//		System.out.println(camera.get_zoom());
+//		g2.scale(camera.get_zoom(), camera.get_zoom());
+//		g2.translate((int)(camera.get_x_pos() + WIDTH/(2*camera.get_zoom())), 
+//				(int)(camera.get_y_pos() + HEIGHT/(2*camera.get_zoom())));
+//		
+//		int xs[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+//		int ys[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+//		for (int x : xs) {
+//			for (int y : ys) {
+//				if ((x+y)%2 == 0) {
+//					int sq_size = 80;
+//					g.setColor(Color.lightGray);
+//					g.fillRect(sq_size*x, sq_size*y, sq_size, sq_size);
+//				}
+//			}
+//		}
 	}
 }
