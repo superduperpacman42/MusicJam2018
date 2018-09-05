@@ -64,7 +64,7 @@ public class Camera {
 		this.speed.set_target_value(speed);
 	}
 	
-	public boolean set_pid_for_item(String item, double p, double i, double d) {
+	public bool set_pid_for_item(String item, double p, double i, double d) {
 		for (PIDSystem system : pids) {
 			if (system.get_name() == item) {
 				system.set_pid(p, i, d);
