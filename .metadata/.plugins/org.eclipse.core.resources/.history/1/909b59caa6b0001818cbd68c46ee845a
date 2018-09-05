@@ -32,8 +32,8 @@ public class Game {
 	
 	public static void main(String[] args) {
 		AudioPlayer.initTestProgram();
-//		Game game = new Game();
-//		game.start();
+		Game game = new Game();
+		game.start();
 	}
 	
 	public Game() {
