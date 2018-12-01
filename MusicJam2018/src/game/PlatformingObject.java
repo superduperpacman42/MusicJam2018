@@ -26,11 +26,8 @@ public class PlatformingObject extends GameObject{
 	}
 	
 	@Override
-	public double[] update(double dt) {
+	public double[] update(Game game, double dt) {
 		this.sprite.animate(currentAnim, dt);
-		
-		
-		applyMovement(dt);
 		return applyMovement(dt);
 	}
 	
@@ -48,8 +45,8 @@ public class PlatformingObject extends GameObject{
 		double dx = effectiveX*dt;
 		double dy = effectiveY*dt;
 		
-		x += dx;
-		y += dy;
+//		x += dx;
+//		y += dy;
 		
 		if (y>640 && effectiveY >= 0) {
 			jump();

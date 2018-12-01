@@ -1,7 +1,0 @@
-package game;
-
-import java.awt.Graphics;
-
-public abstract class Sprite {
-	public abstract void draw(Graphics g);
-}

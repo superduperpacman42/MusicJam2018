@@ -3,6 +3,8 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,10 +22,13 @@ public class Game {
 	public static final int HEIGHT = 755;
 	public static final int MAX_STEP = 50000000;
 	public static final int FRAME_RATE = 12;
-	public int MIN_STEP = 10000000;
+	public int MIN_STEP = 20000000;
 	public int windowWidth;
 	public int windowHeight;
 	public boolean isRunning;
+	public PlatformingObject player;
+	
+	public boolean leftPressed, rightPressed, upPressed, downPressed = false;
 	
 	public int delete_this_variable = 0;
 	public double test_local_time = 0;
@@ -56,7 +61,43 @@ public class Game {
 				draw(g);
 			}
 		});
-		sprites.add(new PlatformingObject(640, 640));
+		frame.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent ke) {
+				switch(ke.getKeyCode()) {
+				case KeyEvent.VK_UP: upPressed = true; break;
+				case KeyEvent.VK_DOWN: downPressed = true; break;
+				case KeyEvent.VK_LEFT: leftPressed = true; break;
+				case KeyEvent.VK_RIGHT: rightPressed = true; break;
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				switch(ke.getKeyCode()) {
+				case KeyEvent.VK_UP: upPressed = false; break;
+				case KeyEvent.VK_DOWN: downPressed = false; break;
+				case KeyEvent.VK_LEFT: leftPressed = false; break;
+				case KeyEvent.VK_RIGHT: rightPressed = false; break;
+				}
+			}
+
+			@Override
+			public void keyTyped(KeyEvent ke) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		player = new PlatformingObject(640, 640);
+		sprites.add(player);
+//		sprites.add(new PlatformingObject(640, 640));
+		sprites.add(new PlatformingObject(640+320, 640));
+		sprites.add(new PlatformingObject(640+160, 640));
+//		sprites.add(new PlatformingObject(640, 640+320));
+//		sprites.add(new PlatformingObject(640+320, 640+160));
+//		sprites.add(new PlatformingObject(640, 640+160));
 		AudioPlayer music = new AudioPlayer("OpenSource.wav");
 		music.play();
 	}
@@ -93,17 +134,43 @@ public class Game {
 		
 		dt = camera.update(dt);	//	dt changes values here based on camera speed
 		Collections.sort(sprites);
-		for(GameObject sprite:sprites) {
-			double[] movement = sprite.update(dt);
-			double dx = movement[0];
-			double dy = movement[1];
-			for(GameObject sprite2:sprites) {
-				if(sprite2!=sprite && sprite2.isCollidable(sprite)) {
-//					sprite.collide()
-				}
-				sprite.move(dx, dy);
-			}
+		// Update GameObjects and store desired movements
+		double[] dx = new double[sprites.size()];
+		double[] dy = new double[sprites.size()];
+//		if(upPressed) player.up();
+//		if(downPressed) player.down();
+//		if(leftPressed) player.left();
+//		if(rightPressed) player.right();
+		for(int i=0; i<sprites.size(); i++) {
+			double[] delta = sprites.get(i).update(this, dt);
+			dx[i] = delta[0];
+			dy[i] = delta[1];
 		}
+		// Collide GameObjects and carry out movements
+		for(int i=0; i<sprites.size()-1; i++) {
+			GameObject s1 = sprites.get(i);
+			for(int j=i+1; j<sprites.size(); j++) {
+				GameObject s2 = sprites.get(j);
+				double[] delta = new double[]{0,0,0};
+				if(s1.isCollidable(s2)) { // s2 can block s1
+					delta = s1.checkCollision(dx[i], dy[i], dx[j], dy[j], s2);
+					dx[i] = delta[0];
+					dy[i] = delta[1];
+				} else if(s2.isCollidable(s1)) { // s1 can block s2
+					delta = s2.checkCollision(dx[j], dy[j], dx[i], dy[i], s1);
+					dx[j] = delta[0];
+					dy[j] = delta[1];
+				} else if(s1.isInteractable(s2)||s2.isInteractable(s1)) { // no blocking
+					delta = s2.checkCollision(dx[j], dy[j], dx[i], dy[i], s1);
+				}
+				if(delta[2]>0) { // collision occurred
+					s2.collide(s1);
+					s1.collide(s2);
+				}
+			}
+			s1.move(dx[i], dy[i]);
+		}
+		sprites.get(sprites.size()-1).move(dx[sprites.size()-1], dy[sprites.size()-1]);
 	}
 
 	/**

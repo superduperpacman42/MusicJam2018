@@ -7,7 +7,7 @@ public class Hydra extends GameObject {
 	}
 
 	@Override
-	public double[] update(double dt) {
+	public double[] update(Game game, double dt) {
 		this.sprite.animate(Animations.HYDRA, dt);
 		return new double[]{0,0};
 	}
